@@ -13,13 +13,13 @@ const verifyToken =(req, res, next) => {
   const token = req.header('Authorization');
 
   if (!token) {
-    return res.status(403).json({ error: 'Acceso denegado: Token no proporcionado' });
+    return res.status(403).json({ error: 'Access Denied: Token not found' });
   }
 
 
   jwt.verify(token, secretKey, (err, user) => {
     if (err) {
-      return res.status(403).json({ error: 'Acceso denegado: Token no válido' });
+      return res.status(403).json({ error: 'Access Denied: invalid Token' });
     }
     req.user = user;
     next();
@@ -31,17 +31,17 @@ const verifyTokenUser = (req, res, next) => {
   const token = req.header('Authorization');
 
   if (!token) {
-    return res.status(403).json({ error: 'Acceso denegado: Token no proporcionado' });
+    return res.status(403).json({ error: 'Access Denied: Token not found' });
   }
 
   jwt.verify(token, secretKey, (err, user) => {
     if (err) {
-      return res.status(403).json({ error: 'Acceso denegado: Token no válido' });
+      return res.status(403).json({ error: 'Access Denied Invalid Token' });
     }
     
     // Verificar que el ID del usuario en el JWT coincida con el ID proporcionado en la solicitud
     if (user.id !==req.params.id) {
-      return res.status(403).json({ error: 'Acceso denegado: El ID del usuario en el token no coincide con el ID proporcionado' });
+      return res.status(403).json({ error: "Access Denied: user ID from token doesn't match solicitude" });
     }
 
     req.user = user;
