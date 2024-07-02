@@ -1,5 +1,5 @@
-const QuoteDAO = require('../dataAccess/QuoteDAO');
-const AppError = require('../utils/AppError');
+const QuoteDAO = require('../dataAccess/quoteDAO');
+const {AppError} = require('../utils/appError');
 
 class QuoteController {
 

@@ -1,5 +1,5 @@
-const GroupDAO = require('../dataAccess/GroupDAO');
-const AppError = require('../utils/AppError');
+const GroupDAO = require('../dataAccess/groupDAO');
+const {AppError} = require('../utils/appError');
 
 class GroupController {
     

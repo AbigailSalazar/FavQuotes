@@ -1,7 +1,7 @@
 const encrypter  = require('../utils/Encrypt');
 const jwtUtils = require('../utils/jwt')
 const UserDAO = require('../dataAccess/userDAO');
-const AppError = require('../utils/AppError');
+const {AppError} = require('../utils/appError');
 
 class UserController {
     
@@ -15,14 +15,14 @@ class UserController {
             
             const decryptedPassword = encrypter.decrypt(user.password);
             if (decryptedPassword === password) {
-                const userData = { id: user._id, name: user.name, email: user.email, photo: user.photo };
+                const userData = { id: user._id, name: user.name, email: user.email };
                 const token = jwtUtils.generateToken(userData);
                 return res.status(200).json({ token });
             } else {
                 return res.status(401).json("Incorrect email or password");
             }
         } catch (error) {
-            next(new AppError("Error authorizing user", 500));
+            next(new AppError("Error authorizing user"+error.message, 500));
         }
     }
 
