@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 
-const quoteSchema = mongoose.Schema.create({
+const quoteSchema = mongoose.Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,
-        require:true
+        require:true,
+        ref:"User"
     },
     person: {
         type: String,

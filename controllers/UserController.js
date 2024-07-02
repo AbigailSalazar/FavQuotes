@@ -1,6 +1,6 @@
 const encrypter  = require('../utils/Encrypt');
 const jwtUtils = require('../utils/jwt')
-const UserDAO = require('../dao/userDAO');
+const UserDAO = require('../dataAccess/userDAO');
 const AppError = require('../utils/AppError');
 
 class UserController {

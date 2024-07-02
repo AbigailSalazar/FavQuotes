@@ -50,9 +50,9 @@ class UserDAO {
         }
     }
 
-    async updateUser(id, User) {
+    async updateUser(id, UserId) {
         try {
-            return await User.findByIdAndUpdate(id, User, { new: true })
+            return await User.findByIdAndUpdate(id, UserId, { new: true })
         } catch (error) {
             throw error;
         }

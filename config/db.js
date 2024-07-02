@@ -6,12 +6,12 @@ const config={
     options:{}
 }
 
-async function conectar(){
+async function connect(){
     return await mongoose.connect(config.url,config.options);
 }
 
-async function desconectar(){
+async function disconnect(){
     return mongoose.disconnect();
 }
 
-module.exports= {conectar,desconectar};
+module.exports= {connect,disconnect};

@@ -1,5 +1,5 @@
 class Quote{
-    constructor(person,quote,votes,user) {
+    constructor(user,person,quote,votes) {
         this.user = user;
         this.person = person;
         this.quote = quote;
