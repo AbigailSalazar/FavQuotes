@@ -127,7 +127,7 @@ class QuoteController {
             }
 
             //Check if this quote was created by the user who made  the request
-            if (existingQuote.user._id === idUsuario) {
+            if (existingQuote.user === idUsuario.toString()) {
                 await QuoteDAO.deleteQuoteById(id);
                 res.status(200).json("Quote successfully deleted");
             }
