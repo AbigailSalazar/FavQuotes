@@ -1,4 +1,4 @@
-const encrypter  = require('../utils/Encrypt');
+const encrypter  = require('../utils/encrypt');
 const jwtUtils = require('../utils/jwt')
 const UserDAO = require('../dataAccess/userDAO');
 const {AppError} = require('../utils/appError');
