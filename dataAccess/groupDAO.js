@@ -40,6 +40,24 @@ class GroupDAO {
         }
     }
 
+    async addQuote(id, quote) {
+        try {
+            return await Group.findByIdAndUpdate(id, {$push:{quotes:quote }}, { new: true });
+        }
+        catch (error) {
+
+        }
+    }
+
+    async removeQuote(id, quote) {
+        try {
+            return await Group.findByIdAndUpdate(id, {$pull:{quotes:quote }}, { new: true });
+        }
+        catch (error) {
+
+        }
+    }
+
     async deleteGroupById(id) {
         try {
             return await Group.findOneAndDelete({ _id: id });

@@ -9,6 +9,7 @@ router.get('/:id',GroupController.getGroupById);
 
 router.post('/',jwtUtils.verifyToken,GroupController.createGroup);
 router.put('/:id',jwtUtils.verifyToken,GroupController.updateGroup);
-
+router.patch("/:id/quotes",jwtUtils.verifyToken,GroupController.addQuote)
+router.delete("/:id/quotes",jwtUtils.verifyToken,GroupController.removeQuote)
 
 module.exports = router;

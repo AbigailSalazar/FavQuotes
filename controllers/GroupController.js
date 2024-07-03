@@ -63,6 +63,44 @@ class GroupController {
         }
     }
 
+    static async addQuote(req, res, next) {
+        try {
+            const id = req.params.id;
+            const existingGroup = await GroupDAO.getGroupById(id);
+            if (!existingGroup) {
+                return next(new AppError('Group not found', 404));
+            }
+
+            const quoteId = req.body.quote;
+            const group = await GroupDAO.addQuote(id, quoteId);
+            if (!group) {
+                return next(new AppError('Group not found', 404));
+            }
+            res.status(200).json(group);
+        } catch (error) {
+            next(new AppError('Error adding quot in group', 500));
+        }
+    }
+
+    static async removeQuote(req, res, next) {
+        try {
+            const id = req.params.id;
+            const existingGroup = await GroupDAO.getGroupById(id);
+            if (!existingGroup) {
+                return next(new AppError('Group not found', 404));
+            }
+
+            const quoteId = req.body.quote;
+            const group = await GroupDAO.removeQuote(id, quoteId);
+            if (!group) {
+                return next(new AppError('Group not found', 404));
+            }
+            res.status(200).json(group);
+        } catch (error) {
+            next(new AppError('Error removing quote in group', 500));
+        }
+    }
+
     static async deleteGroupById(req, res, next) {
         try {
             const id = req.params.id;
