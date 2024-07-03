@@ -126,8 +126,11 @@ class QuoteController {
                 return next(new AppError('Quote not found', 404));
             }
 
+            console.log('User ID from token:', idUsuario);
+            console.log('User ID from quote:', existingQuote.user);
+            
             //Check if this quote was created by the user who made  the request
-            if (existingQuote.user === idUsuario.toString()) {
+            if (existingQuote.user.toString() === idUsuario.toString()) {
                 await QuoteDAO.deleteQuoteById(id);
                 res.status(200).json("Quote successfully deleted");
             }
