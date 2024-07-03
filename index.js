@@ -7,6 +7,8 @@ const { globalErrorHandler, AppError } = require('./utils/appError')
 require('dotenv').config({ path: './variables.env' })
 const db = require('./config/db');
 const userRoutes = require("./routes/userRoutes")
+const quotesRoutes = require("./routes/quoteRoutes")
+
 
 db.connect();
 
@@ -16,6 +18,7 @@ app.use(morgan('combined'))
 app.use(cors())
 
 app.use('/api/users', userRoutes)
+app.use('/api/quotes',quotesRoutes)
 
 
 app.all('*', (res, req, next) => {

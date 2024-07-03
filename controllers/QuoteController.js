@@ -81,6 +81,41 @@ class QuoteController {
         }
     }
 
+    static async likeQuote(req, res, next) {
+        try {
+            const id = req.params.id;
+            const idUsuario  =  req.user.id;
+
+            const existingQuote = await QuoteDAO.getQuoteById(id);
+            if (!existingQuote) {
+                return next(new AppError('Quote not found', 404));
+            }
+
+            const updatedQuote = await QuoteDAO.likeQuote(id, idUsuario);
+            res.status(200).json(updatedQuote);
+        } catch (error) {
+            next(new AppError('Error liking this quote '+error, 500));
+        }
+    }
+
+    static async unlikeQuote(req, res, next) {
+        try {
+            const id = req.params.id;
+            const idUsuario  = req.user.id;
+
+            const existingQuote = await QuoteDAO.getQuoteById(id);
+            if (!existingQuote) {
+                return next(new AppError('Quote not found', 404));
+            }
+
+            const updatedQuote = await QuoteDAO.unlikeQuote(id, idUsuario);
+            res.status(200).json(updatedQuote);
+        } catch (error) {
+            next(new AppError('Error unliking this quote'+error, 500));
+        }
+    }
+
+
     static async deleteQuoteById(req, res, next) {
         try {
             const id = req.params.id;

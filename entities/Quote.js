@@ -1,9 +1,9 @@
 class Quote{
-    constructor(user,person,quote,votes) {
+    constructor(user,person,quote,likes) {
         this.user = user;
         this.person = person;
         this.quote = quote;
-        this.votes = votes;
+        this.like = like;
     }
 }
 module.exports=Quote;

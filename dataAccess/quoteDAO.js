@@ -48,6 +48,24 @@ class QuoteDAO {
         }
     }
 
+    async likeQuote(id,idUser){
+        try {
+            return await Quote.findByIdAndUpdate(id, {$push:{ likes:idUser }}, { new: true });
+        } catch (error) {
+            throw error;
+        }
+    }
+
+   
+
+    async unlikeQuote(id,idUser){
+        try {
+            return await Quote.findByIdAndUpdate(id,  {$pull: { likes: idUser }}, { new: true });
+        } catch (error) {
+            throw error;
+        }
+    }
+
     async deleteQuoteById(id) {
         try {
             return await Quote.findOneAndDelete({ _id: id });

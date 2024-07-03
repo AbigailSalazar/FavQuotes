@@ -14,11 +14,10 @@ const quoteSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    votes:{
-        type: Number,
-        required: true,
-        default: 0
-    }
+    likes:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    }]
 })
 
 module.exports = mongoose.model("Quote", quoteSchema);
