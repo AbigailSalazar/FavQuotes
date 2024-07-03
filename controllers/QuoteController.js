@@ -1,5 +1,5 @@
 const QuoteDAO = require('../dataAccess/quoteDAO');
-const {AppError} = require('../utils/appError');
+const { AppError } = require('../utils/appError');
 
 class QuoteController {
 
@@ -84,7 +84,7 @@ class QuoteController {
     static async likeQuote(req, res, next) {
         try {
             const id = req.params.id;
-            const idUsuario  =  req.user.id;
+            const idUsuario = req.user.id;
 
             const existingQuote = await QuoteDAO.getQuoteById(id);
             if (!existingQuote) {
@@ -94,14 +94,14 @@ class QuoteController {
             const updatedQuote = await QuoteDAO.likeQuote(id, idUsuario);
             res.status(200).json(updatedQuote);
         } catch (error) {
-            next(new AppError('Error liking this quote '+error, 500));
+            next(new AppError('Error liking this quote ' + error, 500));
         }
     }
 
     static async unlikeQuote(req, res, next) {
         try {
             const id = req.params.id;
-            const idUsuario  = req.user.id;
+            const idUsuario = req.user.id;
 
             const existingQuote = await QuoteDAO.getQuoteById(id);
             if (!existingQuote) {
@@ -111,7 +111,7 @@ class QuoteController {
             const updatedQuote = await QuoteDAO.unlikeQuote(id, idUsuario);
             res.status(200).json(updatedQuote);
         } catch (error) {
-            next(new AppError('Error unliking this quote'+error, 500));
+            next(new AppError('Error unliking this quote' + error, 500));
         }
     }
 
@@ -119,6 +119,7 @@ class QuoteController {
     static async deleteQuoteById(req, res, next) {
         try {
             const id = req.params.id;
+            const idUsuario = req.user.id;
 
             const existingQuote = await QuoteDAO.getQuoteById(id);
             if (!existingQuote) {
@@ -126,14 +127,14 @@ class QuoteController {
             }
 
             //Check if this quote was created by the user who made  the request
-            if(existingQuote.user==req.user.id){
+            if (existingQuote.user === idUsuario) {
                 await QuoteDAO.deleteQuoteById(id);
-            res.status(200).json("Quote successfully deleted");
+                res.status(200).json("Quote successfully deleted");
             }
-            else{
-                res.status(403).json({message:"This quote can only be deleted by the user who uploed it"});
+            else {
+                res.status(403).json({ message: "This quote can only be deleted by the user who uploed it" });
             }
- 
+
         } catch (error) {
             next(new AppError('Error deleting quote', 500));
         }
