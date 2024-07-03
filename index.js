@@ -8,7 +8,7 @@ require('dotenv').config({ path: './variables.env' })
 const db = require('./config/db');
 const userRoutes = require("./routes/userRoutes")
 const quotesRoutes = require("./routes/quoteRoutes")
-
+const groupRouter = require("./routes/groupsRoutes")
 
 db.connect();
 
@@ -19,6 +19,7 @@ app.use(cors())
 
 app.use('/api/users', userRoutes)
 app.use('/api/quotes',quotesRoutes)
+app.use("/api/groups",groupRouter)
 
 
 app.all('*', (res, req, next) => {

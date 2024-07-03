@@ -33,7 +33,7 @@ class GroupController {
 
     static async getGroupsByName(req, res, next) {
         try {
-            const name = req.query.name;
+            const name = req.params.name;
             const groups = await GroupDAO.getGroupsByName(name);
             if (!groups || groups.length === 0) {
                 return next(new AppError('Group not found', 404));
