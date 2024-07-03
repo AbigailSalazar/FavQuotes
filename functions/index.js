@@ -3,12 +3,13 @@ const app = express();
 const morgan = require('morgan')
 const cors = require('cors');
 const bodyParser = require("body-parser")
-const { globalErrorHandler, AppError } = require('./utils/appError')
+const { globalErrorHandler, AppError } = require('../utils/appError')
 require('dotenv').config({ path: './variables.env' })
-const db = require('./config/db');
-const userRoutes = require("./routes/userRoutes")
-const quotesRoutes = require("./routes/quoteRoutes")
-const groupRouter = require("./routes/groupsRoutes")
+const db = require('../config/db');
+const userRoutes = require("../routes/userRoutes")
+const quotesRoutes = require("../routes/quoteRoutes")
+const groupRouter = require("../routes/groupsRoutes")
+const serverless = require('serverless-http');
 
 db.connect();
 
@@ -29,9 +30,6 @@ app.all('*', (res, req, next) => {
 
 app.use(globalErrorHandler)
 
-const port = process.env.PORT || 3000
+module.exports.handler = serverless(app);
 
-app.listen(port, () => {
-    console.log(`Port listen on port: ${port}`)
-})
 
