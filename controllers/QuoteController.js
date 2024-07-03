@@ -125,8 +125,15 @@ class QuoteController {
                 return next(new AppError('Quote not found', 404));
             }
 
-            await QuoteDAO.deleteQuoteById(id);
+            //Check if this quote was created by the user who made  the request
+            if(existingQuote.user==req.user.id){
+                await QuoteDAO.deleteQuoteById(id);
             res.status(200).json("Quote successfully deleted");
+            }
+            else{
+                res.status(403).json({message:"This quote can only be deleted by the user who uploed it"});
+            }
+ 
         } catch (error) {
             next(new AppError('Error deleting quote', 500));
         }
