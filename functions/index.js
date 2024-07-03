@@ -18,6 +18,9 @@ app.use(express.json())
 app.use(morgan('combined'))
 app.use(cors())
 
+app.get('/api/', (req, res) => {
+    res.send('API is working!');
+  });
 app.use('/api/users', userRoutes)
 app.use('/api/quotes',quotesRoutes)
 app.use("/api/groups",groupRouter)
