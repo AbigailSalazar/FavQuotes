@@ -56,7 +56,13 @@ class QuoteDAO {
         }
     }
 
-   
+   async getLikedByUser(idUser){
+    try {
+        return await Quote.find({likes:{$all:[idUser]}});
+    } catch (error) {
+        throw error;
+    }   
+   }
 
     async unlikeQuote(id,idUser){
         try {

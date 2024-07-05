@@ -47,6 +47,19 @@ class QuoteController {
         }
     }
 
+    static async getQuotesLikedByUser(req, res, next){
+        try {
+            const idUser = req.params.idUser;
+            const quotes = await QuoteDAO.getLikedByUser(idUser);
+            if (quotes.length === 0) {
+                return next(new AppError('No quotes found', 404));
+            }
+            res.status(200).json(quotes);
+        } catch (error) {
+            next(new AppError('Error retrieving quote', 500));
+        }
+    }
+
     static async updateQuote(req, res, next) {
         try {
             const id = req.params.id;
@@ -114,6 +127,7 @@ class QuoteController {
             next(new AppError('Error unliking this quote' + error, 500));
         }
     }
+
 
 
     static async deleteQuoteById(req, res, next) {
