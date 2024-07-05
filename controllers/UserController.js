@@ -17,7 +17,7 @@ class UserController {
             if (decryptedPassword === password) {
                 const userData = { id: user._id, name: user.name, email: user.email };
                 const token = jwtUtils.generateToken(userData);
-                return res.status(200).json({ token });
+                return res.status(200).json({ token:token, user:userData });
             } else {
                 return res.status(401).json("Incorrect email or password");
             }
