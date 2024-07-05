@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/author',QuoteController.getQuotesByPerson);
 router.get('/:id',QuoteController.getQuoteById);
-router.get('/likes/:idUser',QuoteController.getQuotesLikedByUser)
+router.get('/liked/:idUser',QuoteController.getQuotesLikedByUser)
 
 router.post('/',jwtUtils.verifyToken,QuoteController.createQuote);
 router.put('/:id',jwtUtils.verifyToken,QuoteController.updateQuote);
