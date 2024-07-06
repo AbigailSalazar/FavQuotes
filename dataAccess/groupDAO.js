@@ -16,6 +16,15 @@ class GroupDAO {
         }
     }
 
+    async getGroups(){
+        try {
+            return await Group.find();
+        } catch (error) {
+            throw error;
+        }
+        
+    }
+
     async getGroupById(id) {
         try {
             return await Group.findById(id).populate('quotes');

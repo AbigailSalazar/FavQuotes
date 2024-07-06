@@ -31,6 +31,15 @@ class GroupController {
         }
     }
 
+    static async getGroups(req, res, next) {
+        try {
+            const groups = await GroupDAO.getGroups();
+            res.status(200).json(groups);
+        } catch (error) {
+            next(new AppError("Error retrieving groups", 500));
+        }
+    }
+
     static async getGroupsByName(req, res, next) {
         try {
             const name = req.params.name;

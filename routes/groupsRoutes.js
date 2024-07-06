@@ -3,7 +3,7 @@ const GroupController =require('../controllers/GroupController')
 const jwtUtils = require('../utils/jwt')
 const router = express.Router();
 
-
+router.get("/", GroupController.getGroups)
 router.get('/:name',GroupController.getGroupsByName);
 router.get('/:id',GroupController.getGroupById);
 
