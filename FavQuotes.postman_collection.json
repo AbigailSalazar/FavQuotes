@@ -1,0 +1,668 @@
+{
+	"info": {
+		"_postman_id": "cacf36e7-0cfd-4605-ab3d-d2cdf39d5b26",
+		"name": "FavQuotes",
+		"description": "A collection of APIs that help you saving you favorites quotes from your friends, Artist, Writers, etc.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36703263"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Register user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"test name\",\r\n  \"email\": \"email@gmail.com\",\r\n  \"password\": \"1234\",\r\n  \"photo\": \"https://link-to-image.jpg\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https:///{{api}}/users",
+							"protocol": "https",
+							"path": [
+								"{{api}}",
+								"users"
+							]
+						},
+						"description": "This API endpoint allows you to create a new user by sending a POST request to the specified URL. The request should include the user's name, email, password, and photo in the request body.\n\n### Request Body\n\n- `name` (string): The name of the user.\n    \n- `email` (string): The email address of the user.\n    \n- `password` (string): The password for the user account.\n    \n- `photo` (string): The photo of the user.\n    \n\n### Response\n\nThe response to this request will include the details of the newly created user, including a unique identifier for the user, name, email, and any other relevant user information."
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \"email\": \"tesemailg@example.com\",\r\n  \"password\": \"testPassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{api}}/api/users/authentication",
+							"protocol": "https",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"authentication"
+							]
+						},
+						"description": "\n### POST /api/users/authentication\n\nThis endpoint is used to authenticate users by providing their email and password.\n\n#### Request Body\n- email (string, required): The email of the user.\n- password (string, required): The password of the user.\n\n#### Response\nThe response is in JSON format with the following schema:\n```json\n{\n  \"token\": \"string\"\n}\n```\n- token (string): The authentication token for the user.\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Get by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODQ3ZjNkZTM5Mzg4OTc0NjRjMTk1OSIsIm5hbWUiOiJKb2huIERvZSIsImVtYWlsIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3MTk5NjAzNzUsImV4cCI6MTcxOTk2Mzk3NX0._pS0lJFrKL4OJLnST3kBGosgo8Xqykq174ILbV-nMm0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{api}}/api/users/6684732455e833a622d530fb",
+							"protocol": "https",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"6684732455e833a622d530fb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"name to update\",\r\n  \"email\": \"email@example.com\",\r\n  \"photo\": \"//link-to-image.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{api}}/api/users/66847f3de3938897464c1959",
+							"protocol": "https",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"66847f3de3938897464c1959"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{api}}/api/users/66847f3de3938897464c1959",
+							"protocol": "https",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"66847f3de3938897464c1959"
+							]
+						},
+						"description": "### Delete User\n\nThis endpoint is used to delete a specific user by providing the user ID in the URL.\n\n#### Request Body\n\nThis request does not require a request body.\n\n#### Response\n\nThe response will not contain a body, but will include a status code to indicate the success or failure of the deletion operation."
+					},
+					"response": []
+				}
+			],
+			"description": "API for the administration of FavQuotes Users"
+		},
+		{
+			"name": "Quotes",
+			"item": [
+				{
+					"name": "Create quote",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": \"66848d7f0c9c5a36752c3b64\",\r\n    \"person\": \"person name\",\r\n    \"quote\": \"quote text\",\r\n    \"likes\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{api}}/api/quotes",
+							"protocol": "https",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"quotes"
+							]
+						},
+						"description": "### Add Quote\n\nThis endpoint allows the user to add a new quote.\n\n#### Request Body\n\n- `user` (string): The user adding the quote.\n    \n- `person` (string): The person who said the quote.\n    \n- `quote` (string): The actual quote.\n    \n- `likes` (array): An array of users id who liked the quote.\n    \n\n#### Response\n\n- Status: 201 Created\n    \n- Content-Type: application/json\n    \n- `user` (string): The user who added the quote.\n    \n- `person` (string): The person who said the quote.\n    \n- `quote` (string): The actual quote.\n    \n- `likes` (array): An array of users who liked the quote.\n    \n- `_id` (string): The unique identifier for the quote.\n    \n- `__v` (number): Version control field."
+					},
+					"response": []
+				},
+				{
+					"name": "Edit quote",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": \"66848d7f0c9c5a36752c3b64\",\r\n    \"person\": \"person name\",\r\n    \"quote\": \"quote text\",\r\n    \"likes\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{api}}/api/quotes/668491090c9c5a36752c3b71",
+							"protocol": "https",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"quotes",
+								"668491090c9c5a36752c3b71"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by author",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{api}}/api/quotes/author?person=person name",
+							"protocol": "https",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"quotes",
+								"author"
+							],
+							"query": [
+								{
+									"key": "person",
+									"value": "person name"
+								}
+							]
+						},
+						"description": "### Get Author Quotes\n\nThis endpoint retrieves quotes by a specific author.\n\n#### Request\n\n- Method: GET\n    \n- URL: `api-url/api/quotes/author`\n    \n- Query Parameters:\n    \n    - person (string, required): The name of the author for whom quotes are to be retrieved.\n        \n\n#### Response\n\nThe response will be a JSON array containing quote objects with the following properties:\n\n- `_id` (string): The unique identifier for the quote.\n    \n- `user` (string): The user associated with the quote.\n    \n- `person` (string): The name of the author for whom the quote is attributed.\n    \n- `quote` (string): The actual quote.\n    \n- `likes` (array): An array of users who have liked the quote.\n    \n- `__v` (number): Version key.\n    \n\n#### JSON Schema\n\n``` json\n[\n  {\n    \"_id\": \"\",\n    \"user\": \"\",\n    \"person\": \"\",\n    \"quote\": \"\",\n    \"likes\": [],\n    \"__v\": 0\n  }\n]\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{api}}}/api/quotes/66857edf613669f16ca7a9e5",
+							"protocol": "https",
+							"host": [
+								"{{api}}}"
+							],
+							"path": [
+								"api",
+								"quotes",
+								"66857edf613669f16ca7a9e5"
+							]
+						},
+						"description": "### Get Quote by ID\n\nThis endpoint retrieves a specific quote by its unique ID.\n\n#### Request\n\n- Method: GET\n    \n- URL: `api-url/api/quotes/66857edf613669f16ca7a9e5`\n    \n\n#### Response\n\nThe response will be a JSON object with the following schema:\n\n``` json\n{\n  \"_id\": \"string\",\n  \"user\": \"string\",\n  \"person\": \"string\",\n  \"quote\": \"string\",\n  \"likes\": \"array\",\n  \"__v\": \"number\"\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Liked by user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{api}}/api/quotes/liked/66848d7f0c9c5a36752c3b64",
+							"protocol": "https",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"quotes",
+								"liked",
+								"66848d7f0c9c5a36752c3b64"
+							]
+						},
+						"description": "### Get Quote by ID\n\nThis endpoint retrieves a specific quote by its unique ID.\n\n#### Request\n\n- Method: GET\n    \n- URL: `api-url/api/quotes/66857edf613669f16ca7a9e5`\n    \n\n#### Response\n\nThe response will be a JSON object with the following schema:\n\n``` json\n{\n  \"_id\": \"string\",\n  \"user\": \"string\",\n  \"person\": \"string\",\n  \"quote\": \"string\",\n  \"likes\": \"array\",\n  \"__v\": \"number\"\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Like quote",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{api}}/api/quotes/66885bea4baa49ff8249aaa0/like",
+							"protocol": "https",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"quotes",
+								"66885bea4baa49ff8249aaa0",
+								"like"
+							]
+						},
+						"description": "# Patch Quote Like\n\nThis endpoint is used to update the like status of a specific quote to liked. Adds this quote to the user's liked quotes.\n\n## Request\n\n- Method: `PATCH`\n    \n- URL: `https://{{api}}/api/quotes/66885bea4baa49ff8249aaa0/like`\n    \n\n## Response\n\nThe response for this request is a JSON object conforming to the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"id\": {\n      \"type\": \"string\"\n    },\n    \"quote\": {\n      \"type\": \"string\"\n    },\n    \"author\": {\n      \"type\": \"string\"\n    },\n    \"liked\": {\n      \"type\": \"boolean\"\n    }\n  }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Unlike quote",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{api}}/api/quotes/66848f440c9c5a36752c3b6f/unlike",
+							"protocol": "https",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"quotes",
+								"66848f440c9c5a36752c3b6f",
+								"unlike"
+							]
+						},
+						"description": "This endpoint is used to update the like status of a specific quote to unliked. Removes this quote from the user's liked quotes.\n\n## Request\n\n- Method: `PATCH`\n    \n- URL: `https://api-fav-quotes.netlify.app/api/quotes/66885bea4baa49ff8249aaa0/unlike`\n    \n\n### Response\n\nThe response will contain the updated details of the quote after the unlike action has been processed."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete quote",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{api}}/api/quotes/6685de7c96901a80cbaa66ef",
+							"protocol": "https",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"quotes",
+								"6685de7c96901a80cbaa66ef"
+							]
+						},
+						"description": "### Delete Quote\n\nThis endpoint is used to delete a specific quote by providing the quote ID in the URL.\n\n#### Request Body\n\nThis endpoint does not require a request body.\n\n#### Response\n\nUpon successful deletion, the response will return a 204 status code with no content."
+					},
+					"response": []
+				}
+			],
+			"description": "An API for the administration of your favorites quotes"
+		},
+		{
+			"name": "Groups",
+			"item": [
+				{
+					"name": "Create group",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Pop culture!\",\r\n  \"photo\": \"//link-to-image.jpg\",\r\n  \"quotes\": []\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{api}}/api/groups",
+							"protocol": "https",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"groups"
+							]
+						},
+						"description": "This endpoint allows you to create a new group by sending an HTTP POST\n\n### Request Body\n\n- `name`: (string) The name of the group.\n    \n- `photo`: (string) The URL of the group photo.\n    \n- `quotes`: (array) An array of quotes id associated with the group.\n    \n\n### Response\n\nUpon successful creation, the server will respond with a status code of 201 and a JSON object containing the details of the newly created group, including the \"name\", \"photo\", \"quotes\", \"_id\", and \"__v\" properties.\n\nExample Response Body:\n\n``` json\n{\n    \"name\": \"\",\n    \"photo\": \"\",\n    \"quotes\": [],\n    \"_id\": \"\",\n    \"__v\": 0\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Get by name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{api}}/api/groups/name",
+							"protocol": "https",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"groups",
+								"name"
+							]
+						},
+						"description": "### Get Group Information\n\nThis endpoint retrieves information about the \"name\" group.\n\n#### Request Body\n\nThis endpoint does not require a request body.\n\n#### Response Body\n\n- `id` (string): The unique identifier of the group.\n    \n- `name` (string): The name of the group.\n    \n- `photo` (string): The photo of the group.\n    \n- `quotes` (array): An array of quotes from this group\n    \n    - `id` (string): The unique identifier of the member.\n        \n    - `user` (string): The Id of the user who upload the quote.\n        \n    - `person` (string): The person who said the quote\n        \n    - `quote` (string): The text quote\n        \n    - `likes` (Array): An array of Users id that liked the quote\n        \n\n#### Example\n\n``` json\n[\n    {\n        \"_id\": \"6684712f29055dc870d11170\",\n        \"name\": \"Positivity\",\n        \"photo\": \"https://i.pinimg.com/564x/d6/80/8e/d6808eff5333a5fe9c1d34c68d0bb9e1.jpg\",\n        \"quotes\": [\n            {\n                \"_id\": \"6709961f56d707d4b40d6777\",\n                \"user\": \"670994fa56d707d4b40d6759\",\n                \"person\": \"Rachel Marie Martin\",\n                \"quote\": \"Sometimes, you have to let go of the picture of what you thought about life and learn to find joy in the story you are actually living.\",\n                \"likes\": [],\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"6709967e56d707d4b40d677c\",\n                \"user\": \"670994fa56d707d4b40d6759\",\n                \"person\": \"Tony Robbins\",\n                \"quote\": \"Setting goals is the first step in turning the invisible into the visible\",\n                \"likes\": [],\n                \"__v\": 0\n            }\n        ],\n        \"__v\": 0\n    }\n]\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// No visualization script needed for this response\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{api}}/api/groups/",
+							"protocol": "https",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"groups",
+								""
+							]
+						},
+						"description": "### Get Group Information\n\nThis endpoint retrieves information about all groups.\n\n#### Request Body\n\nThis endpoint does not require a request body.\n\n#### Response Body\n\n- `id` (string): The unique identifier of the group.\n    \n- `name` (string): The name of the group.\n    \n- photo (string): The photo of the group.\n    \n- quotes (array): An array of quotes id from this group\n    \n\n#### Example\n\n``` json\n[\n    {\n        \"_id\": \"6684712f29055dc870d11170\",\n        \"name\": \"Positivity\",\n        \"photo\": \"https://i.pinimg.com/564x/d6/80/8e/d6808eff5333a5fe9c1d34c68d0bb9e1.jpg\",\n        \"quotes\": [\n            \"668b0f65f3ad2679d9be2e40\",\n            \"6709961f56d707d4b40d6777\",\n            \"6709967e56d707d4b40d677c\"\n        ],\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"6684713029055dc870d11174\",\n        \"name\": \"Philosophy\",\n        \"photo\": \"https://i.pinimg.com/564x/7f/43/a1/7f43a1d4d5f0a14c0db635b4631aa6c5.jpg\",\n        \"quotes\": [\n            \"668b336d954002659659baf1\",\n            \"668b338c954002659659baf5\",\n            \"668b3425954002659659baff\",\n            \"668b3454954002659659bb04\",\n            \"668b34f2954002659659bb0b\",\n            \"668b3511954002659659bb10\"\n        ],\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"6685825f613669f16ca7a9f9\",\n        \"name\": \"Science!\",\n        \"photo\": \"https://i.pinimg.com/564x/ac/c5/af/acc5af1fac4ec657005dfc7d45da764f.jpg\",\n        \"quotes\": [\n            \"668b3563954002659659bb1d\",\n            \"668b359e954002659659bb21\",\n            \"668b35c0954002659659bb26\",\n            \"668b35d4954002659659bb2b\",\n            \"668b3602954002659659bb30\",\n            \"668b3638954002659659bb35\"\n        ],\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"6689a029d61ef711c32be3b5\",\n        \"name\": \"Pop culture!\",\n        \"photo\": \"https://i.pinimg.com/564x/98/03/b1/9803b1d5f8122e29c816fde00a4ab280.jpg\",\n        \"quotes\": [\n            \"668b328f954002659659badb\",\n            \"668b32c0954002659659badf\",\n            \"668b32e9954002659659bae4\",\n            \"668b332b954002659659bae9\"\n        ],\n        \"__v\": 0\n    }\n]\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Get by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{api}}/api/groups/66849e1a37a8840572e632e4",
+							"protocol": "https",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"groups",
+								"66849e1a37a8840572e632e4"
+							]
+						},
+						"description": "This endpoint allows you to get a group by its id.\n\n## Response\n\n``` json\n{\n        \"_id\": \"6684712f29055dc870d11170\",\n        \"name\": \"Positivity\",\n        \"photo\": \"https://i.pinimg.com/564x/d6/80/8e/d6808eff5333a5fe9c1d34c68d0bb9e1.jpg\",\n        \"quotes\": [\n            \"668b0f65f3ad2679d9be2e40\",\n            \"6709961f56d707d4b40d6777\",\n            \"6709967e56d707d4b40d677c\"\n        ],\n        \"__v\": 0\n    },\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Group",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Group name\",\r\n  \"photo\": \"URL group photo\",\r\n  \"quotes\": [\"quoteid\",\"quoteId\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{api}}/api/groups/6684712f29055dc870d11170",
+							"protocol": "https",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"groups",
+								"6684712f29055dc870d11170"
+							]
+						},
+						"description": "This endpoint allows you to update a specific group by its id.\n\n### Body\n\n- `name`: (string) The name of the group.\n    \n- `photo`: (string) The URL of the group photo.\n    \n- `quotes`: (array) An array of quote IDs associated with the group.\n    \n\nThe response will include the updated details of the group after the successful update."
+					},
+					"response": []
+				},
+				{
+					"name": "Add quote",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quote\":\"66885bea4baa49ff8249aaa0\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{api}}/api/groups/66849e1a37a8840572e632e4/quotes",
+							"protocol": "https",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"groups",
+								"66849e1a37a8840572e632e4",
+								"quotes"
+							]
+						},
+						"description": "This endpoint makes an HTTP PATCH request to update quotes for a specific group. The request should include a payload with the raw request body type, containing the new quote to be added to the group.\n\n### Response\n\nThe response returned is a JSON object with the following schema:\n\n``` json\n{\n        \"_id\": \"6684712f29055dc870d11170\",\n        \"name\": \"Positivity\",\n        \"photo\": \"https://i.pinimg.com/564x/d6/80/8e/d6808eff5333a5fe9c1d34c68d0bb9e1.jpg\",\n        \"quotes\": [\n            \"668b0f65f3ad2679d9be2e40\",\n            \"6709961f56d707d4b40d6777\",\n            \"6709967e56d707d4b40d677c\"\n        ],\n        \"__v\": 0\n    },\n\n ```\n\nThe response contains the updated quotes list of the group."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete quote",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quote\":\"6709967e56d707d4b40d677c\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{api}}/api/groups/6684712f29055dc870d11170/quotes",
+							"protocol": "https",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"groups",
+								"6684712f29055dc870d11170",
+								"quotes"
+							]
+						},
+						"description": "This endpoint makes an HTTP DELETE request to delete a specific quote from a group.\n\nThe request payload should include the following in the raw request body type:\n\n``` json\n{\n  \"quote\": \"668cb1e56fd5ec38fa5b1a97\"\n}\n\n ```"
+					},
+					"response": []
+				}
+			],
+			"description": "An API for administrate Groups of quotes"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "api",
+			"value": "api-url",
+			"type": "string"
+		}
+	]
+}
